@@ -5,7 +5,7 @@ pipeline {
             steps {
                 sh 'sudo docker rm static'
                 sh 'sudo docker run --name static -d -p 80:80 nginx'
-                sh 'sudo docker cp index.htmp static:/usr/share/nginx/html/index.html'
+                sh 'sudo docker cp index.html static:/usr/share/nginx/html/index.html'
             }
         }
         stage('Test') {
