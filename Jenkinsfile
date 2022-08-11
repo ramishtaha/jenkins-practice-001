@@ -3,17 +3,20 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'first step'
+                sh 'docker rm static'
+                sh 'docker run --name static -d -p 80:80 nginx'
+                sh 'docker cp index.htmp static:/usr/share/nginx/html/index.html'
             }
         }
         stage('Test') {
             steps {
-                echo 'second step'
+                sh 'STATUS=$(curl -s -o /dev/null -w \"%{http_code}\" http://www.example.org/)'
+                sh 'echo $STATUS'
             }
         }
         stage('Deploy') {
             steps {
-                echo 'third step'
+                echo 'Work in Progress'
             }
         }
     }
