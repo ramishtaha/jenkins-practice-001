@@ -3,9 +3,10 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'sudo docker rm -f static'
-                sh 'sudo docker run --name static -d -p 80:80 nginx'
-                sh 'sudo docker cp index.html static:/usr/share/nginx/html/index.html'
+                sh 'docker stop static'
+                sh 'docker rm -f static'
+                sh 'docker run --name static -d -p 80:80 nginx'
+                sh 'docker cp index.html static:/usr/share/nginx/html/index.html'
             }
         }
         stage('Test') {
